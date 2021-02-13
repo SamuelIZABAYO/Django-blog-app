@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from pathlib import Path
 
@@ -95,18 +94,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# import sys
+# if sys.argv[1] != 'runserver':
+#     STATIC_ROOT = os.path.join(BASE_DIR, "static")
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-CSP_DEFAULT_SRC = ("'none'", )
+CSP_DEFAULT_SRC = ("'none'",)
 CSP_STYLE_SRC = ("'self'", "fonts.googleapis.com", "'sha256-/3kWSXHts8LrwfemLzY9W0tOv5I4eLIhrf0pT8cU0WI='")
 CSP_SCRIPT_SRC = ("'self'", "ajax.googleapis.com", "www.googletagmanager.com", "www.google-analytics.com")
 CSP_IMG_SRC = ("'self'", "data:", "www.googletagmanager.com", "www.google-analytics.com")
 CSP_FONT_SRC = ("'self'", "fonts.gstatic.com")
-CSP_CONNECT_SRC = ("'self'", )
-CSP_OBJECT_SRC = ("'none'", )
-CSP_BASE_URI = ("'none'", )
-CSP_FRAME_ANCESTORS = ("'none'", )
-CSP_FORM_ACTION = ("'self'", )
+CSP_CONNECT_SRC = ("'self'",)
+CSP_OBJECT_SRC = ("'none'",)
+CSP_BASE_URI = ("'none'",)
+CSP_FRAME_ANCESTORS = ("'none'",)
+CSP_FORM_ACTION = ("'self'",)
 CSP_INCLUDE_NONCE_IN = ('script-src',)
