@@ -14,11 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 # from django.conf import settings
+
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', include(('admin_honeypot.urls', 'admin_honeypot'), namespace='admin_honeypot')),
+    path('admin-panel/', admin.site.urls),
+    # path(config('SECRET_ADMIN_URL') + '/admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
+    # path('admin-master/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
     path('', include('Blog_app.urls')),
