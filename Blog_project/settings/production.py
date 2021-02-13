@@ -1,5 +1,7 @@
-DEBUG = True
+from Blog_project.settings.base import *
 
+DEBUG = False
+SECRET_KEY = config('SECRET_KEY')
 ALLOWED_HOSTS = ['*']
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -19,10 +21,18 @@ AUTH_PASSWORD_VALIDATORS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db_name',
-        'USER': 'username',
-        'PASSWORD': 'password',
+        'NAME': 'TestDjango',
+        'USER': 'postgres',
+        'PASSWORD': '12',
         'HOST': 'localhost',
-        'PORT': ''
+        'PORT': '5432'
     }
 }
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_HSTS_SECONDS = 86400  # 1 day
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
