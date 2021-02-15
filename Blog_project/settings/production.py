@@ -1,3 +1,5 @@
+import dj_database_url
+
 DEBUG = False
 ALLOWED_HOSTS = ['boiling-forest-99884.herokuapp.com']
 AUTH_PASSWORD_VALIDATORS = [
@@ -14,6 +16,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+DATABASES = { 'default' : dj_database_url.config()}
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
