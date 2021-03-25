@@ -24,7 +24,7 @@ SECRET_KEY = '=idbsejbyhgm!3fuhm*ra93_wwc1wc2eiajm+!w2*xu^z#-rs0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['intense-fjord-90722.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
