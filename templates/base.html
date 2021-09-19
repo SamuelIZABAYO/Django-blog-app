@@ -3,31 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Django blog</title>
-    <link href="https://fonts.googleapis.com/css?family=Source+Sana+Por:400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <meta name="google" content="notranslate"/>
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous"/>
 </head>
 <body>
-<header>
-    <div class="nav-left">
-        <h1><a href="{% url 'home' %}">HOME</a></h1>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow" id="mainNav">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item text-black">
+                    <a class="nav-link text-black font-weight-bold" href="#">About</a>
+                </li>
+                <li class="nav-item text-black">
+                    <a class="nav-link text-black font-weight-bold" href="#">Policy</a>
+                </li>
+                <li class="nav-item text-black">
+                    <a class="nav-link text-black font-weight-bold" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
     </div>
+</nav>
+{% block content %}
+<!-- Content Goes here -->
+{% endblock content %}
 
-    <div class="nav-right">
-        <a href="{% url 'post_new' %}">+ New Blog Post</a>
-    </div>
-</header>
-{% if user.is_authenticated %}
-<p>Hi {{ user.username }}!</p>
-<p><a href="{% url 'logout' %}">Log out</a></p>
-{% else %}
-<p>You are not logged in.</p>
-<a href="{% url 'login' %}">Log In</a><br>
-<br>
-<a href="{% url 'signup' %}">Sign Up</a>
-{% endif %}
-<div>
-    {% block content %}
-    {% endblock content %}
-</div>
+<!-- Footer -->
+<footer class="py-3 bg-grey">
+    <p class="m-0 text-dark text-center ">Copyright &copy; Crush Work</p>
+</footer>
 </body>
+
 </html>
