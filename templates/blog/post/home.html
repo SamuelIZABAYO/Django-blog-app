@@ -6,7 +6,7 @@
         {{ post.title }}
     </a>
     </h2>
-    <p> {{ post.body|truncatewords:10|linebreaksbr }}</p>
+    <p> {{ post.body|truncatewords:10|linebreaks }}</p>
     <p class="date" style="color: grey">
         By {{ post.author }} {{ post.publish }}
     </p>

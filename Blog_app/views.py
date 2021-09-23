@@ -2,8 +2,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
 
-from .forms import PostForm, UpdateForm
-from .models import Post
+from .forms import PostForm, UpdateForm,CommentForm
+from .models import Post, Comment
 
 
 def post_list(request, template_name='blog/post/home.html'):
@@ -22,7 +22,20 @@ def post_list(request, template_name='blog/post/home.html'):
 
 def post_detail(request, slug, template_name='blog/post/post_detail.html'):
     single_post = Post.objects.get(slug=slug)
-    context = {'data': single_post}
+    comments = single_post.comments.filter(active=True)
+    new_comment=None
+    if request.method=='POST':
+        comment_form=CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment=comment_form.save(commit=False)  # model instance created but not saved to the DB
+            new_comment.post=single_post
+            new_comment.save()
+    else:
+        comment_form=CommentForm()
+    context = {'data': single_post,
+               'comments':comments,
+               'new_comment':new_comment,
+               'comment_form':comment_form}
     return render(request, template_name, context)
 
 

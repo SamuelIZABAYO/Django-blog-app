@@ -1,0 +1,4 @@
+Hello {{name}}
+
+You were been recommended by a friend.
+Read the post.

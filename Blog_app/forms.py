@@ -38,5 +38,11 @@ class UpdateForm(ModelForm):
     class Meta:
         model = Post
         fields = '__all__'
-        exclude = ['slug', 'publish', 'created', 'status','author']
+        exclude = ['slug', 'publish', 'created', 'status', 'author']
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'email', 'body')
 

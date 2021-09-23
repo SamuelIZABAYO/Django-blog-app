@@ -9,10 +9,36 @@
     </p>
     <p>{{ data.body|linebreaks }}</p>
 </div>
+{% with comments.count as total_comments %}
+<h2>
+    {{ total_comments }} comment{{ total_comments|pluralize }}
+</h2>
+{% endwith %}
+{% for comment in comments %}
+<div class="comment">
+    <p class="info"style="color: grey">
+        Comment {{ forloop.counter }} by {{ comment.name }}
+        {{ comment.created }}
+    </p>
+    {{ comment.body|linebreaks }}
+</div>
+{% empty %}
+<p>There are no comments yet.</p>
+{% endfor %}
+{% if new_comment %}
+<h2>Your comment has been added.</h2>
+{% else %}
+<h2>Add a new comment</h2>
+<form method="post">
+    {{ comment_form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Add comment"></p>
+</form>
+{% endif %}
 <div>
-<a href="{% url 'post_update' data.pk %}">+ Edit Blog Post</a>
+<a href="{% url 'post_update' data.pk %}"> Edit Blog Post</a>
 </div>
 <div>
-   <a href="{% url 'confirm_delete' data.pk%}">+ Delete Blog Post</a>
+   <a href="{% url 'confirm_delete' data.pk%}">Delete Blog Post</a>
 </div>
 {% endblock content %}
