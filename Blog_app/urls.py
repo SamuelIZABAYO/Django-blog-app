@@ -7,9 +7,10 @@ from . import views
 urlpatterns = [
     path('<int:pk>', views.post_delete, name='post_delete'),
     path('confirm_delete/<int:pk>', views.confirm_delete, name='confirm_delete'),
-    path('<int:pk>', views.post_update, name='post_update'),
+    path('update/<int:pk>', views.post_update, name='post_update'),
     # url('post.new/', views.post_create(), name='post_new'),
     path('<slug:slug>', views.post_detail, name='post_detail'),
+    path('tag/<slug:tag_slug>/', views.post_list, name='post_list_by_tag'),
     path('', views.post_list, name='home'),
 ]
 # <slug:slug>

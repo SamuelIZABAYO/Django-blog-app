@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from taggit.managers import TaggableManager
+from taggit.models import Tag
 
 
 class Post(models.Model):
@@ -27,6 +29,7 @@ class Post(models.Model):
                          max_length=200
                          # editable=False,
                          )
+    tags = TaggableManager()
 
     @classmethod
     def update_post(cls, post_id, title, body):
@@ -42,14 +45,14 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse('post:post_detail',
-                       # kwargs={'slug': self.slug})
-                       args=[
-                           self.publish.year,
-                           self.publish.month,
-                           self.publish.day,
-                           self.slug])
+    # def get_absolute_url(self):
+    #     return reverse('post:post_detail',
+    #                    # kwargs={'slug': self.slug})
+    #                    args=[
+    #                        self.publish.year,
+    #                        self.publish.month,
+    #                        self.publish.day,
+    #                        self.slug])
 
 
 class Comment(models.Model):

@@ -9,6 +9,16 @@
     </p>
     <p>{{ data.body|linebreaks }}</p>
 </div>
+
+<h2>Similar posts</h2>
+{% for data in similar_posts %}
+<p>
+    <a href="{{data.get_absolute_url}}">{{data.title}}</a>
+</p>
+{% empty %}
+There are no similar posts yet.
+{% endfor %}
+
 {% with comments.count as total_comments %}
 <h2>
     {{ total_comments }} comment{{ total_comments|pluralize }}
