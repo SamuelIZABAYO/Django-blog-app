@@ -1,3 +1,4 @@
+{% load blog_tags %}
 {% load static %}
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
     <title>Django blog</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <meta name="google" content="notranslate"/>
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous"/>
@@ -35,14 +36,28 @@
         </div>
     </div>
 </nav>
-{% block content %}
-<!-- Content Goes here -->
-{% endblock content %}
+<div id="content">
+    {% block content %}
+    {% endblock content %}
+</div>
+<div id="sidebar">
+    <h2>My blog</h2>
+    <p>This is my blog. I've written {% total_posts %} posts so far.</p>
+    <h3>Latest posts</h3>
+    {% get_recent_posts 3 %}
+    <br>
+    
+</div>
 
 <!-- Footer -->
-<footer class="py-3 bg-grey">
-    <p class="m-0 text-dark text-center ">Copyright &copy; Crush Work</p>
-</footer>
+
+<!--<footer>-->
+<!--  <p class="text-center">2021 Copyright &copy; Crush Work</p>-->
+<!--</footer>-->
+
+<!-- Footer -->
+
 </body>
 
 </html>
+<!--2021 Copyright &copy; Crush Work-->
