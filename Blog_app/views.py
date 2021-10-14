@@ -1,3 +1,4 @@
+from django.contrib.postgres.search import SearchVector
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
 from django.http import HttpResponse
@@ -5,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
 from taggit.models import Tag
 
-from .forms import PostForm, UpdateForm, CommentForm
+from .forms import PostForm, UpdateForm, CommentForm, SearchForm
 from .models import Post, Comment
 
 
@@ -88,3 +89,5 @@ def post_delete(request, pk):
 def confirm_delete(request, pk):
     post = Post.objects.get(pk=pk)
     return render(request, 'blog/post/post_delete.html', context={'post': post})
+
+
