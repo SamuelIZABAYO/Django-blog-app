@@ -1,4 +1,4 @@
-from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
 from django.http import HttpResponse
@@ -99,8 +99,25 @@ def post_search(request, template_name='blog/post/search.html'):
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
+
+            # Ordinary search
+            # results = Post.objects.filter(status='published'). \
+            #     annotate(search=SearchVector('title', 'body'), ). \
+            #     filter(search=query)
+            # search_vector=SearchVector('title','body')
+
+            # Search with stemming and ranking functionality
+            search_vector = SearchVector('title', weight='A') + \
+                            SearchVector('title', weight='B')
+            search_query = SearchQuery(query)
             results = Post.objects.filter(status='published'). \
-                annotate(search=SearchVector('title', 'body'), ). \
-                filter(search=query)
+                annotate(search=search_vector,
+                         rank=SearchRank(search_vector, search_query)
+                         ).filter(search=search_query).order_by('-rank')
+
+            # Triagram similarity search
+            # results = Post.objects.filter(status='published').annotate(
+            #     similarity=TrigramSimilarity('title', query),
+            # ).filter(similarity__gt=0.3).order_by('-similarity')
     context = {'form': form, 'query': query, 'results': results}
     return render(request, template_name, context)
