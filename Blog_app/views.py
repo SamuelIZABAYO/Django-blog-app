@@ -91,3 +91,16 @@ def confirm_delete(request, pk):
     return render(request, 'blog/post/post_delete.html', context={'post': post})
 
 
+def post_search(request, template_name='blog/post/search.html'):
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Post.objects.filter(status='published'). \
+                annotate(search=SearchVector('title', 'body'), ). \
+                filter(search=query)
+    context = {'form': form, 'query': query, 'results': results}
+    return render(request, template_name, context)

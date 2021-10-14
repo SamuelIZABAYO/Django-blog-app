@@ -9,9 +9,7 @@
 
 {% for pos in data %}
 <div class="post-entry">
-    <h2><a href="{% url 'post_detail' pos.slug %}">
-        {{ pos.title }}
-    </a>
+    <h2><a href="{% url 'post_detail' pos.slug %}">{{ pos.title }}</a>
 
     </h2>
     <p class="tags">
@@ -25,7 +23,7 @@
         {% endfor %}
     </p>
     <p> {{ pos.body|truncatewords:10|linebreaks }}</p>
-<br>
+    <br>
     <p class="date" style="color: grey; font-style:italic;">
         Published {{ pos.publish }} by {{ post.author }}
     </p>
